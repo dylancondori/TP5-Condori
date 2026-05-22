@@ -1,5 +1,5 @@
-package tp1_actividad_1;
-public class TP1_actividad_1 {
+package tp5_actividad_1;
+public class TP5_actividad_1 {
     public static void main(String[] args) {
         int[][]matriz = new int [2][2];
         matriz[0][0] = 4;
