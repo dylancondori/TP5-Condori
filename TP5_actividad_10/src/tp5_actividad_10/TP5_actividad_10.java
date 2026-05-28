@@ -1,34 +1,153 @@
 package tp5_actividad_10;
 import java.util.Random;
+import java.util.Scanner;
 public class TP5_actividad_10 {
 
     public static void main(String[] args) {
-        int [][]temperaturas = new int[5][7];
-        temperaturas = LlenarMatriz(temperaturas,7,38)
-        for(int i = 0;i < 5;i++){
-            for(int j = 0;j < 7;j++){
-                System.out.print(temperaturas[i][j]);
+                int[][] temp = new int[5][7];
+
+        lm(temp);
+
+        mm(temp);
+
+        ts(temp);
+
+        ps(temp);
+
+        tm(temp);
+
+    }
+
+    public static void lm(int[][] temp) {
+
+        Random random = new Random();
+
+        int dia=1;
+
+        for (int i=0;i<5;i++) {
+
+            for (int j=0;j<7;j++) {
+
+                if (dia<=31) {
+
+                    temp[i][j] = random.nextInt(32) + 7;
+
+                    dia++;
+
+                }
+
             }
-            System.out.println(  );
+
         }
+
     }
-        static int[][] LlenarMatriz(int[][] Matriz, int mi, int max){
-            Random Aleatorio = new Random();
-            int contador = 0;
-            for(int i; i < 5;i++){
-                for(int j = 0;j < 7;j++){
-                Matriz[i][j] = Aleatorio.nextInt(min,max);
-                contador = contador + 1;
-                if(contador >= 31)break;
-                   
+
+    public static void mm(int[][] temp) {
+
+        System.out.println("Temperaturas:\n");
+
+        for (int i=0;i<5;i++) {
+
+            for (int j=0;j<7;j++) {
+
+                System.out.print("[" + temp[i][j] + "]");
+
             }
+
+            System.out.println();
+
         }
-            return Matriz;
+
     }
-    static int[] BuscarExtremos(int[][]Matriz){
-        
+
+    public static void ts (int[][] temp) {
+
+        for (int i=0;i<5;i++) {
+
+            int mayor=temp[i][0];
+
+            int menor=temp[i][0];
+
+            int dm=0;
+
+            int dme=0;
+
+            for (int j=0;j<7;j++) {
+
+                if (temp[i][j]>mayor) {
+
+                    mayor=temp[i][j];
+
+                    dm=j;
+
+                }
+
+                if (temp[i][j]<menor) {
+
+                    menor=temp[i][j];
+
+                    dme=j;
+
+                }
+
+            }
+
+            System.out.println("Semana " + (i + 1) + " | Mayor: " + mayor + " dia " + dme + " | Menor: " + menor + " dia " + dme);
+
+        }
+
     }
-    static float BuscarPromedio(int[][]Matriz){
-        
+
+    
+
+    public static void ps(int[][] temp) {
+
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Ingrese semana (1-5): ");
+
+        int s = scanner.nextInt() - 1;
+
+        int suma = 0;
+
+        for (int j=0;j<7;j++) {
+
+            suma +=temp[s][j];
+
+        }
+
+        double p=(double)suma/7;
+
+        System.out.println("Promedio semana " + (s + 1) + ": " + p);
+
+    }
+
+    public static void tm (int[][] temp) {
+
+        int mayor=temp[0][0];
+
+        int sm=0;
+
+        int dm=0;
+
+        for (int i=0;i<5;i++) {
+
+            for (int j=0;j<7;j++) {
+
+                if (temp[i][j]>mayor) {
+
+                    mayor = temp[i][j];
+
+                    sm=i;
+
+                    dm=j;
+
+                }
+
+            }
+
+        }
+
+        System.out.println("Mayor temperatura del mes: " + mayor + " | semana " + (sm + 1) + " dia " + dm);
     } 
 }
