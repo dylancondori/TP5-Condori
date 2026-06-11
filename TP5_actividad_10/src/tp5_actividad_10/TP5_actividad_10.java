@@ -3,7 +3,7 @@ import java.util.Random;
 import java.util.Scanner;
 public class TP5_actividad_10 {
     public static void main(String[] args) {
-                int[][] temp = new int[5][7];
+    int[][] temp = new int[5][7];
         lm(temp);
         mm(temp);
         ts(temp);
