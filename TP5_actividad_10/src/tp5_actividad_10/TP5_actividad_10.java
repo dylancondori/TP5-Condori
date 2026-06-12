@@ -1,79 +1,67 @@
 package tp5_actividad_10;
 import java.util.Random;
-import java.util.Scanner;
-public class TP5_actividad_10 {
+public class TP5_actividad_10{
+    static int[] BuscarExtremos(int[][] Matriz){
+        int[] Extremos = new int[4];
+        Extremos[2] = 40;
+        int contador = 0;
+        for(int i = 0; i < 5; i++){
+             for(int j = 0; j < 7; j++){              
+             if(Extremos[0] < Matriz[i][j]){          
+                 Extremos[0] = Matriz[i][j];
+                 Extremos[1] = j;
+             }    
+             if(Extremos[2] > Matriz[i][j]){
+                 Extremos[2] = Matriz[i][j];
+                 Extremos[3] = j;
+             }      
+             contador++;
+             if(contador >= 31) break;                      
+        }      
+    }
+        return Extremos;
+    }
+    static float BuscarPromedio(int[][] Matriz, int semana){
+        float promedio = 0.0f;
+        int contador = 0;
+        for(int i = 0; i < 5; i++){
+            for(int j = 0; j < 7; j++){
+                promedio = promedio + Matriz[i][j];
+                contador++;
+                if (contador >= 31) break;
+            }
+        }
+        promedio = promedio / 31.0f;  
+        return promedio;
+    }
     public static void main(String[] args) {
-    int[][] temp = new int[5][7];
-        lm(temp);
-        mm(temp);
-        ts(temp);
-        ps(temp);
-        tm(temp);
+    int[][] temperaturas = new int[5][7];
+    temperaturas = LlenarMatriz(temperaturas, 7, 38);
+    float promedio = BuscarPromedio(temperaturas,0);
+    System.out.println("el promedio de la semana 0 es " + promedio); 
+    int [] Resultado = BuscarExtremos(temperaturas);
+    System.out.println("temperatura mas alta = " + Resultado[0]);
+    System.out.println("dia de T mas alta = " + Resultado[1]);
+    System.out.println("temperatura mas baja = " + Resultado[2]);
+    System.out.println("dia de T mas baja = " + Resultado[3]);
+    //mostrar resultados
+    for(int i = 0; i < 5; i++){
+    for(int j = 0; j < 7; j++){
+    System.out.print(temperaturas[i][j]+ "  ");    
     }
-    public static void lm(int[][] temp) {
-        Random random = new Random();
-        int dia=1;
-        for (int i=0;i<5;i++) {
-            for (int j=0;j<7;j++) {
-                if (dia<=31) {
-                    temp[i][j] = random.nextInt(32) + 7;
-                    dia++;
-                }
-            }
-        }
+    System.out.println( );
     }
-    public static void mm(int[][] temp) {
-        System.out.println("Temperaturas:\n");
-        for (int i=0;i<5;i++) {
-            for (int j=0;j<7;j++) {
-                System.out.print("[" + temp[i][j] + "]");
-            }
-            System.out.println();
-        }
     }
-    public static void ts (int[][] temp) {
-        for (int i=0;i<5;i++) {
-            int mayor=temp[i][0];
-            int menor=temp[i][0];
-            int dm=0;
-            int dme=0;
-            for (int j=0;j<7;j++) {
-                if (temp[i][j]>mayor) {
-                    mayor=temp[i][j];
-                    dm=j;
-                }
-                if (temp[i][j]<menor) {
-                    menor=temp[i][j];
-                    dme=j;
-                }
-            }
-            System.out.println("Semana " + (i + 1) + " | Mayor: " + mayor + " dia " + dme + " | Menor: " + menor + " dia " + dme);
+    static int[][] LlenarMatriz(int[][] Matriz, int min, int max){
+    Random Aleatorio = new Random();
+    int contador = 0;    
+    for(int i = 0; i < 5; i++ ){
+        for(int j = 0; j < 7; j++){
+        Matriz[i][j] = Aleatorio.nextInt( min, max);
+        contador = contador +1;
+        if (contador >= 31) break;  
         }
+    }  
+    return Matriz;
     }
-    public static void ps(int[][] temp) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Ingrese semana (1-5): ");
-        int s = scanner.nextInt() - 1;
-        int suma = 0;
-        for (int j=0;j<7;j++) {
-            suma +=temp[s][j];
-        }
-        double p=(double)suma/7;
-        System.out.println("Promedio semana " + (s + 1) + ": " + p);
-    }
-    public static void tm (int[][] temp) {
-        int mayor=temp[0][0];
-        int sm=0;
-        int dm=0;
-        for (int i=0;i<5;i++) {
-            for (int j=0;j<7;j++) {
-                if (temp[i][j]>mayor) {
-                    mayor = temp[i][j];
-                    sm=i;
-                    dm=j;
-                }
-            }
-        }
-        System.out.println("Mayor temperatura del mes: " + mayor + " | semana " + (sm + 1) + " dia " + dm);
-    } 
 }
